@@ -13,7 +13,11 @@ import {
   getFirestore,
   doc, 
   addDoc,
-  collection
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  collection,
+  onSnapshot
 } from 'firebase/firestore';
 
 // import { getFirestore } from 'firebase/firestore';
@@ -42,4 +46,4 @@ export const fbFunction = {
   GoogleAuthProvider,
   GithubAuthProvider
 };
-export const dbFunction = {doc, addDoc, collection};
+export const dbFunction = {doc, addDoc, getDocs, updateDoc, deleteDoc,collection, onSnapshot};

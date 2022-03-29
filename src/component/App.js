@@ -5,11 +5,13 @@ import {authService, fbFunction} from 'fbase';
 function App() {
   const [init, setInit]= useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+  const [userObj, setUserObj] = useState(null);
 
   useEffect(()=>{
     fbFunction.onAuthStateChanged(authService, (user) => {
       if(user){
         setIsLoggedIn(true);
+        setUserObj(user);
       }else{
         setIsLoggedIn(false);
       }
@@ -19,7 +21,7 @@ function App() {
 
   return (
     <>
-      {init?<AppRouter isLoggedIn={isLoggedIn}/>:"initializing"}
+      {init?<AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/>:"initializing"}
       <footer>&copy; {new Date().getFullYear()} Sangwitter</footer>
     </>
     
