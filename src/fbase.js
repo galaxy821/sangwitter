@@ -8,6 +8,17 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider
 } from 'firebase/auth';
+import {
+  Firestore,
+  getFirestore,
+  doc, 
+  addDoc,
+  collection
+} from 'firebase/firestore';
+
+// import { getFirestore } from 'firebase/firestore';
+
+// import { Firestore } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -20,8 +31,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-export const authService = getAuth();
 export const firebaseInstance = firebase;
+export const authService = getAuth();
+export const dbService = getFirestore();
 export const fbFunction = {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
@@ -30,3 +42,4 @@ export const fbFunction = {
   GoogleAuthProvider,
   GithubAuthProvider
 };
+export const dbFunction = {doc, addDoc, collection};
