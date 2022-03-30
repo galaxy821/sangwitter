@@ -6,7 +6,8 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
-  GithubAuthProvider
+  GithubAuthProvider,
+  updateProfile,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -16,7 +17,10 @@ import {
   updateDoc,
   deleteDoc,
   collection,
-  onSnapshot
+  onSnapshot,
+  query,
+  where,
+  orderBy
 } from 'firebase/firestore';
 import {
   getStorage,
@@ -51,7 +55,8 @@ export const fbFunction = {
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
-  GithubAuthProvider
+  GithubAuthProvider,
+  updateProfile
 };
 export const dbFunction = {
   doc, 
@@ -60,11 +65,14 @@ export const dbFunction = {
   updateDoc,
   deleteDoc,
   collection, 
-  onSnapshot
+  onSnapshot,
+  query,
+  where,  
+  orderBy
 };
 export const storageFunction = {
   ref,
   uploadString,
   getDownloadURL,
-  deleteObject
+  deleteObject,
 }

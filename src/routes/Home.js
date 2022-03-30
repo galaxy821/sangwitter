@@ -9,9 +9,6 @@ const Home = (userObj) =>{
     const [sangweets, setSangweets] = useState([]);
     const [attachment, setAttachment] = useState("");
 
-    // console.log(userObj);
-    // console.log(userObj.userObj.uid);
-
     /*
     const getSangweets = async ()=>{
         const dbSangweets = await dbFunction.getDocs(dbFunction.collection(dbService, "sangweets"));

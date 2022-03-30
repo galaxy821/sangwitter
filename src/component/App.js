@@ -10,8 +10,12 @@ function App() {
   useEffect(()=>{
     fbFunction.onAuthStateChanged(authService, (user) => {
       if(user){
-        setIsLoggedIn(true);
-        setUserObj(user);
+        //setIsLoggedIn(true);
+        setUserObj({
+          uid : user.id,
+          displayName : user.displayName,
+          updateProfile : (arg)=>user.updateProfile(arg),
+        });
       }else{
         setIsLoggedIn(false);
       }
@@ -19,9 +23,20 @@ function App() {
     });
   },[]);
 
+  const refreshUser = () => {
+    // setUserObj(authService.currentUser);
+    const user = authService.currentUser;
+    setUserObj({
+      uid : user.id,
+      displayName : user.displayName,
+      updateProfile : (arg)=>user.updateProfile(arg),
+    });
+    console.log(userObj);
+  };
+
   return (
     <>
-      {init?<AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/>:"initializing"}
+      {init?<AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} refreshUser={refreshUser}/>:"initializing"}
       <footer>&copy; {new Date().getFullYear()} Sangwitter</footer>
     </>
     
