@@ -9,7 +9,6 @@ import {
   GithubAuthProvider
 } from 'firebase/auth';
 import {
-  Firestore,
   getFirestore,
   doc, 
   addDoc,
@@ -19,6 +18,13 @@ import {
   collection,
   onSnapshot
 } from 'firebase/firestore';
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 
 // import { getFirestore } from 'firebase/firestore';
 
@@ -38,6 +44,7 @@ firebase.initializeApp(firebaseConfig);
 export const firebaseInstance = firebase;
 export const authService = getAuth();
 export const dbService = getFirestore();
+export const storageService = getStorage();
 export const fbFunction = {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
@@ -46,4 +53,18 @@ export const fbFunction = {
   GoogleAuthProvider,
   GithubAuthProvider
 };
-export const dbFunction = {doc, addDoc, getDocs, updateDoc, deleteDoc,collection, onSnapshot};
+export const dbFunction = {
+  doc, 
+  addDoc, 
+  getDocs, 
+  updateDoc,
+  deleteDoc,
+  collection, 
+  onSnapshot
+};
+export const storageFunction = {
+  ref,
+  uploadString,
+  getDownloadURL,
+  deleteObject
+}

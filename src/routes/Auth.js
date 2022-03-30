@@ -43,7 +43,7 @@ const Auth = () =>{
         let provider;
         if(name === "google"){
             provider = new fbFunction.GoogleAuthProvider(authService);
-        }else if(name =="github"){
+        }else if(name ==="github"){
             provider = new fbFunction.GithubAuthProvider(authService);
         }
 

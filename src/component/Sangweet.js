@@ -1,4 +1,4 @@
-import { dbService, dbFunction } from "fbase";
+import { dbService, dbFunction, storageService, storageFunction } from "fbase";
 import { useState } from "react";
 
 const Sangweet = ({sangweetObj, isOwner}) =>{
@@ -9,9 +9,17 @@ const Sangweet = ({sangweetObj, isOwner}) =>{
         const ok = window.confirm("삭제하시겠습니까?");
         console.log(ok);
         if(ok){
-            console.log(sangweetObj.id);
-            const data = await dbFunction.deleteDoc(dbFunction.doc(dbService,`sangweets/${sangweetObj.id}`));
-            console.log(data); 
+            // console.log(sangweetObj.id);
+            await dbFunction.deleteDoc(dbFunction.doc(dbService,`sangweets/${sangweetObj.id}`));
+            // console.log(data); 
+            if(sangweetObj.attachmentUrl !==""){
+                await storageFunction.deleteObject(storageFunction.ref(storageService,sangweetObj.attachmentUrl)).then(() => {
+                    console.log("image delete successfully!")
+                  }).catch((error) => {
+                    console.log("Threr is an error during delete image");
+                    console.log(error);
+                  });
+            }
         }
     }
 
@@ -46,6 +54,7 @@ const Sangweet = ({sangweetObj, isOwner}) =>{
             ):(
                 <>
             <h4>{sangweetObj.text}!!</h4>
+            {sangweetObj.attachmentUrl && (<img src={sangweetObj.attachmentUrl} width="50px" height="50px" alt="SangweetImg"/>)}
             {isOwner &&(
                 <>
                 <button onClick={onDeleteClick}>Delete Sangweet</button>
