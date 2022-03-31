@@ -5,6 +5,7 @@ import {authService, fbFunction} from 'fbase';
 function App() {
   const [init, setInit]= useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+  //const [smallUserObj, setSmallUserObj] = useState(null);
   const [userObj, setUserObj] = useState(null);
 
   useEffect(()=>{
@@ -12,12 +13,13 @@ function App() {
       if(user){
         //setIsLoggedIn(true);
         setUserObj({
-          uid : user.id,
+          uid : user.uid,
           displayName : user.displayName,
           updateProfile : (arg)=>user.updateProfile(arg),
         });
       }else{
-        setIsLoggedIn(false);
+        //setIsLoggedIn(false);
+        setUserObj(false);
       }
       setInit(true);
     });
@@ -26,8 +28,9 @@ function App() {
   const refreshUser = () => {
     // setUserObj(authService.currentUser);
     const user = authService.currentUser;
+    console.log(user);
     setUserObj({
-      uid : user.id,
+      uid : user.uid,
       displayName : user.displayName,
       updateProfile : (arg)=>user.updateProfile(arg),
     });

@@ -7,9 +7,11 @@ import Sangweet from "component/Sangweet";
 const Profile = ({userObj, refreshUser}) =>{
     const {updateProfile} = fbFunction;
     const [mySangweets, setMySangweets] = useState([]);
-    const [mySangweet, setMySangweet] = useState("");
+    //const [mySangweet, setMySangweet] = useState("");
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
     const history = useHistory();
+
+    console.log(userObj);
 
     const onLogOutClick = () => {
         authService.signOut();
@@ -17,7 +19,7 @@ const Profile = ({userObj, refreshUser}) =>{
     };
 
     // console.log(userObj.uid);
-    /*
+    
     const getMySangweets = async() =>{
         
         const dataCollection = await dbFunction.collection(dbService, "sangweets");
@@ -32,12 +34,12 @@ const Profile = ({userObj, refreshUser}) =>{
         });
         
         
-    };*/
+    };
 
     //after rendering
-    // useEffect(()=>{
-        // getMySangweets();
-    // },[]);
+    useEffect(()=>{
+        getMySangweets();
+    },[]);
 
     const onChange=(event)=>{
         const{
@@ -53,7 +55,7 @@ const Profile = ({userObj, refreshUser}) =>{
         console.log("original profile name : ",userObj.displayName);
         if(userObj.displayName !== newDisplayName){
             
-            await updateProfile(userObj, {displayName : newDisplayName}).then(() => {
+            await updateProfile(authService.currentUser, {displayName : newDisplayName}).then(() => {
                 console.log("profile update!");
             }).catch((error) => {
                 console.log("there is error!");
@@ -62,7 +64,7 @@ const Profile = ({userObj, refreshUser}) =>{
         }
     };
 
-
+    console.log(mySangweets);
     return (
     <>
         <form onSubmit={onSubmit}>
@@ -72,7 +74,8 @@ const Profile = ({userObj, refreshUser}) =>{
         <button onClick={onLogOutClick}>Log Out</button>
         <div>
             {mySangweets.map((mySangweet)=>{
-                return <Sangweet key={mySangweet.id}sangweetObj={mySangweet} isOwner={mySangweet.creatorId ===userObj.uid}/>;
+                console.log(mySangweet);
+                return <Sangweet key={mySangweet.id} sangweetObj={mySangweet} isOwner={mySangweet.creatorId === userObj.uid}/>;
             })}
         </div>
     </>);
