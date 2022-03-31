@@ -55,7 +55,7 @@ const Sangweet = ({sangweetObj, isOwner}) =>{
                 </>
             ):(
                 <>
-            <h4>{sangweetObj.text}!!</h4>
+            <h4>{sangweetObj.text}</h4>
             {sangweetObj.attachmentUrl && (<img src={sangweetObj.attachmentUrl} width="50px" height="50px" alt="SangweetImg"/>)}
             {isOwner &&(
                 <div className="nweet__actions">

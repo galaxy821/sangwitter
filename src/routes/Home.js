@@ -19,14 +19,15 @@ const Home = ({userObj}) =>{
         // console.log(sangweets);
     };*/
     const getSangweets = async () =>{
-        const dataCollection = await dbFunction.collection(dbService, "sangweets");
-        const q = await dbFunction.query(dataCollection, dbFunction.where("creatorId", "==", userObj.uid), dbFunction.orderBy("createAt", "asc"));
+        const q = await dbFunction.query(dbFunction.collection(dbService, "sangweets"), dbFunction.orderBy("createAt", "asc"));
         return q;
     }
     useEffect(()=>{
         //getSangweets();
         // dbFunction.collection(dbService,"sangweets").onSnapshot  
-        dbFunction.onSnapshot(dbFunction.collection(dbService,"sangweets"), (snapshot)=>{
+        // dbFunction.onSnapshot(dbFunction.collection(dbService,"sangweets"), (snapshot)=>{
+        const q = dbFunction.query(dbFunction.collection(dbService, "sangweets"), dbFunction.orderBy("createAt", "desc"));
+        dbFunction.onSnapshot(q, (snapshot)=>{
             const newArray = snapshot.docs.map((document)=>({
                 id: document.id, ...document.data(),
             }));
