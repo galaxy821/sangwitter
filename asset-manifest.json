@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/sangwitter/static/js/main.eb9b3bd9.js",
+    "index.html": "/sangwitter/index.html",
+    "main.eb9b3bd9.js.map": "/sangwitter/static/js/main.eb9b3bd9.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.eb9b3bd9.js"
+  ]
+}
