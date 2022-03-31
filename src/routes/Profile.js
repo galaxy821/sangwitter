@@ -66,19 +66,20 @@ const Profile = ({userObj, refreshUser}) =>{
 
     console.log(mySangweets);
     return (
-    <>
-        <form onSubmit={onSubmit}>
-            <input type="text" placeholder="Display name" onChange={onChange} value={newDisplayName}/>
-            <input type="submit" placeholder="Update Profile"/>
+    <div className="container">
+        <form onSubmit={onSubmit} className="profileForm">
+            <input type="text" placeholder="Display name" onChange={onChange} value={newDisplayName} autoFocus className="formInput"/>
+            <input type="submit" placeholder="Update Profile" className="formBtn" style={{marginTop : 10,}}/>
         </form>
-        <button onClick={onLogOutClick}>Log Out</button>
-        <div>
+        <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>Log Out</span>
+        <div style={{marginTop : 20,}}>
             {mySangweets.map((mySangweet)=>{
                 console.log(mySangweet);
                 return <Sangweet key={mySangweet.id} sangweetObj={mySangweet} isOwner={mySangweet.creatorId === userObj.uid}/>;
             })}
         </div>
-    </>);
+    </div>
+    );
 }
 
 export default Profile;

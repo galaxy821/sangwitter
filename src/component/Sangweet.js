@@ -1,5 +1,7 @@
 import { dbService, dbFunction, storageService, storageFunction } from "fbase";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Sangweet = ({sangweetObj, isOwner}) =>{
     const [editing, setEditing] = useState(false);
@@ -42,24 +44,24 @@ const Sangweet = ({sangweetObj, isOwner}) =>{
     }
 
     return(
-        <div>
+        <div className="nweet">
             {editing?(
                 <>
-                    <form onSubmit={onSubmit}>
-                        <input onChange={onChange} value={newSangweet} required />
-                        <input type="submit" value="Update Sangweet" />
+                    <form onSubmit={onSubmit} className="conatiner nweetEdit">
+                        <input onChange={onChange} value={newSangweet} required placeholder="Edit your sangweet" autoFocus className="formInput"/>
+                        <input type="submit" value="Update Sangweet" className="formBtn"/>
                     </form>
-                    <button onClick={toggleEditing}>Cancel</button>
+                    <button onClick={toggleEditing} className="formBtn cancelBtn">Cancel</button>
                 </>
             ):(
                 <>
             <h4>{sangweetObj.text}!!</h4>
             {sangweetObj.attachmentUrl && (<img src={sangweetObj.attachmentUrl} width="50px" height="50px" alt="SangweetImg"/>)}
             {isOwner &&(
-                <>
-                <button onClick={onDeleteClick}>Delete Sangweet</button>
-                <button onClick={toggleEditing}>Edit Sangweet</button>
-                </>
+                <div className="nweet__actions">
+                    <span onClick={onDeleteClick}><FontAwesomeIcon icon={faTrash}/></span>
+                    <span onClick={toggleEditing}><FontAwesomeIcon icon={faPencilAlt}/></span>
+                </div>
             )}
             </>
             )}

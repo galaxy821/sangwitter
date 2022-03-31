@@ -18,7 +18,11 @@ const Home = ({userObj}) =>{
         });
         // console.log(sangweets);
     };*/
-
+    const getSangweets = async () =>{
+        const dataCollection = await dbFunction.collection(dbService, "sangweets");
+        const q = await dbFunction.query(dataCollection, dbFunction.where("creatorId", "==", userObj.uid), dbFunction.orderBy("createAt", "asc"));
+        return q;
+    }
     useEffect(()=>{
         //getSangweets();
         // dbFunction.collection(dbService,"sangweets").onSnapshot  
@@ -31,14 +35,14 @@ const Home = ({userObj}) =>{
     },[]);
 
     return (
-        <>
+        <div className="container">
         <SangweetFactory userObj={userObj}/>
-        <div>
+        <div style={{marginTop :30}}>
             {sangweets.map((sangweet)=>{
                 return <Sangweet key={sangweet.id} sangweetObj={sangweet} isOwner={sangweet.creatorId === userObj.uid}/>;
             })}
         </div>
-        </>
+        </div>
     );
 }
 

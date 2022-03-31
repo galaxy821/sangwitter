@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import AppRouter from 'component/Router';
 import {authService, fbFunction} from 'fbase';
+import "./styles.css";
 
 function App() {
   const [init, setInit]= useState(false);
@@ -40,7 +41,7 @@ function App() {
   return (
     <>
       {init?<AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} refreshUser={refreshUser}/>:"initializing"}
-      <footer>&copy; {new Date().getFullYear()} Sangwitter</footer>
+      <footer style={{display:"flex", justifyContent : "center" }}><span>&copy; {new Date().getFullYear()} Sangwitter</span></footer>
     </>
     
   );
