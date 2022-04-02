@@ -8,7 +8,7 @@ import {
 import AuthForm from "component/AuthForm";
 import "style/Auth.css";
 
-const Auth = () => {
+const Auth = ({ isVerified, isLoggedIn, refreshUser }) => {
   const { GoogleAuthProvider, GithubAuthProvider, signInWithPopup } =
     fbFunction;
   const onSocialClick = async (event) => {
@@ -62,7 +62,11 @@ const Auth = () => {
         size="3x"
         style={{ marginBottom: 30 }}
       />
-      <AuthForm />
+      <AuthForm
+        isVerified={isVerified}
+        isLoggedIn={isLoggedIn}
+        refreshUser={refreshUser}
+      />
       <div className="authBtns">
         <button onClick={onSocialClick} name="google" className="authBtn">
           Continue with Google <FontAwesomeIcon icon={faGoogle} />

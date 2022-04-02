@@ -12,11 +12,8 @@ const Sangweet = ({ sangweetObj, isOwner }) => {
 
   const onDeleteClick = async () => {
     const ok = window.confirm("삭제하시겠습니까?");
-    console.log(ok);
     if (ok) {
-      // console.log(sangweetObj.id);
       await deleteDoc(doc(dbService, `sangweets/${sangweetObj.id}`));
-      // console.log(data);
       if (sangweetObj.attachmentUrl !== "") {
         await deleteObject(ref(storageService, sangweetObj.attachmentUrl))
           .then(() => {

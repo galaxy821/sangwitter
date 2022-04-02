@@ -10,35 +10,42 @@ import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigation from "./Navigation";
 
-const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
+const AppRouter = ({ isLoggedIn, userObj, refreshUser, isVerified }) => {
+  // console.log(isVerified);
   return (
     <Router>
-      {isLoggedIn && <Navigation userObj={userObj} />}
+      {isLoggedIn && isVerified && <Navigation userObj={userObj} />}
       <Switch>
-        {isLoggedIn ? (
-          <div
-            style={{
-              maxWidth: 890,
-              width: "100%",
-              margin: "0 auto",
-              marginTop: 80,
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+        <>
+          {isLoggedIn && isVerified ? (
+            <div
+              style={{
+                maxWidth: 890,
+                width: "100%",
+                margin: "0 auto",
+                marginTop: 80,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Route exact path="/">
+                <Home userObj={userObj} />
+              </Route>
+              <Route exact path="/profile">
+                <Profile userObj={userObj} refreshUser={refreshUser} />
+              </Route>
+            </div>
+          ) : (
             <Route exact path="/">
-              <Home userObj={userObj} />
+              <Auth
+                isVerified={isVerified}
+                isLoggedIn={isLoggedIn}
+                refreshUser={refreshUser}
+              />
             </Route>
-            <Route exact path="/profile">
-              <Profile userObj={userObj} refreshUser={refreshUser} />
-            </Route>
-          </div>
-        ) : (
-          <Route exact path="/">
-            <Auth />
-          </Route>
-        )}
-        {/* <Redirect from='*' to="/" /> */}
+          )}
+          {/* <Redirect from='*' to="/" /> */}
+        </>
       </Switch>
     </Router>
   );

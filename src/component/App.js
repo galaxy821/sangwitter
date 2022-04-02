@@ -8,6 +8,7 @@ function App() {
   const { onAuthStateChanged } = fbFunction;
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  const [isVerified, SetVerified] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
@@ -19,6 +20,10 @@ function App() {
           displayName: user.displayName,
           updateProfile: (arg) => user.updateProfile(arg),
         });
+
+        if (authService.currentUser.emailVerified) {
+          SetVerified(true);
+        }
       } else {
         console.log("Not LogIn!");
         setUserObj(false);
@@ -27,8 +32,15 @@ function App() {
     });
   }, []);
 
+  if (authService.currentUser)
+    console.log(authService.currentUser.emailVerified);
+
   const refreshUser = () => {
     const user = authService.currentUser;
+    console.log("refresh user!");
+    if (user.emailVerified) {
+      SetVerified(true);
+    }
     setUserObj({
       uid: user.uid,
       displayName: user.displayName,
@@ -43,6 +55,7 @@ function App() {
           isLoggedIn={Boolean(userObj)}
           userObj={userObj}
           refreshUser={refreshUser}
+          isVerified={isVerified}
         />
       ) : (
         "initializing"
