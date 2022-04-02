@@ -11,35 +11,46 @@ function App() {
   const [isVerified, SetVerified] = useState(false);
 
   useEffect(() => {
+    // console.log("App > useEffect");
     onAuthStateChanged(authService, (user) => {
       if (user) {
-        console.log("LogIn!");
+        // console.log("App > useEffect LogIn!");
         setUserObj({
           /*compat userobj version */
           uid: user.uid,
           displayName: user.displayName,
           updateProfile: (arg) => user.updateProfile(arg),
         });
-
+        /*
+        console.log(
+          "App > useEffect > emailVerified ",
+          authService.currentUser.emailVerified
+        );
+*/
         if (authService.currentUser.emailVerified) {
+          // console.log("App > useEffect > emailVerified IF(true)");
           SetVerified(true);
         }
       } else {
-        console.log("Not LogIn!");
+        // console.log("Not LogIn!");
         setUserObj(false);
       }
       setInit(true);
     });
   }, []);
-
+  /*
   if (authService.currentUser)
-    console.log(authService.currentUser.emailVerified);
-
+    console.log(
+      "App IF(authService.currentUser) > ",
+      authService.currentUser.emailVerified
+    );
+*/
   const refreshUser = () => {
     const user = authService.currentUser;
-    console.log("refresh user!");
+    // console.log("refreshUser > refresh user!");
     if (user.emailVerified) {
       SetVerified(true);
+      // console.log("refreshUser > email verified!!");
     }
     setUserObj({
       uid: user.uid,

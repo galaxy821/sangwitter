@@ -29,7 +29,7 @@ const AuthForm = ({ isVerified, isLoggedIn, refreshUser }) => {
 
   const onSubmit = async (event) => {
     // refreshUser();
-    console.log("AuthForm > onSumbit!");
+    // console.log("AuthForm > onSumbit!");
     event.preventDefault();
     try {
       if (newAccount) {
@@ -42,10 +42,16 @@ const AuthForm = ({ isVerified, isLoggedIn, refreshUser }) => {
 
             sendEmailVerification(user)
               .then(function () {
-                console.log("email send!!");
+                /*
+                console.log(
+                  "AuthForm > onSubmit > if newAccount >> email send!!"
+                );*/
               })
               .catch("there is an error while sendEmailVerificaion");
 
+            setErrorMessage("An email confirmation email has been sent.");
+            toggleAccount();
+            /*
             setTimeout(() => {
               console.log("signin processing...");
             }, 500);
@@ -71,7 +77,7 @@ const AuthForm = ({ isVerified, isLoggedIn, refreshUser }) => {
             console.log(error.code);
             // setError(error.message);
           });
-        console.log(authService.currentUser.emailVerified);
+        // console.log("AuthForm > onSubmit ",authService.currentUser.emailVerified);
       } else {
         // log in
         console.log("AuthForm > onSumbit! > login clicked!", email, password);
@@ -81,12 +87,17 @@ const AuthForm = ({ isVerified, isLoggedIn, refreshUser }) => {
             //const user = userCredential.user;
             // ...
             refreshUser();
-            console.log("login...ing...", isVerified);
+            console.log(
+              "AuthForm > onSumbit! > login clicked!  login...ing...",
+              isVerified
+            );
             if (isVerified) {
-              console.log("login success!!");
+              console.log(
+                "AuthForm > onSumbit! > login clicked! login success!!"
+              );
             } else {
               const message = "Email verification has not been completed. ";
-              setErrorMessage();
+              setErrorMessage(message);
             }
           })
           .catch((error) => {
