@@ -1,0 +1,47 @@
+.sangweetEdit .formBtn {
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  
+  .sangweet {
+    margin-bottom: 20px;
+    background-color: white;
+    width: 100%;
+    max-width: 320px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .sangweet h4 {
+    font-size: 14px;
+  }
+  
+  .sangweet img {
+    right: -10px;
+    top: 20px;
+    position: absolute;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+  }
+  
+  .sangweet__actions {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  
+  .sangweet__actions span {
+    cursor: pointer;
+  }
+  
+  .sangweet__actions span:first-child {
+    margin-right: 10px;
+  }
+  
