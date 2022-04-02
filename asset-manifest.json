@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/sangwitter/static/css/main.f4ae1e8d.css",
-    "main.js": "/sangwitter/static/js/main.a690bb42.js",
+    "main.css": "/sangwitter/static/css/main.2a740778.css",
+    "main.js": "/sangwitter/static/js/main.4cbc3972.js",
     "index.html": "/sangwitter/index.html",
-    "main.f4ae1e8d.css.map": "/sangwitter/static/css/main.f4ae1e8d.css.map",
-    "main.a690bb42.js.map": "/sangwitter/static/js/main.a690bb42.js.map"
+    "main.2a740778.css.map": "/sangwitter/static/css/main.2a740778.css.map",
+    "main.4cbc3972.js.map": "/sangwitter/static/js/main.4cbc3972.js.map"
   },
   "entrypoints": [
-    "static/css/main.f4ae1e8d.css",
-    "static/js/main.a690bb42.js"
+    "static/css/main.2a740778.css",
+    "static/js/main.4cbc3972.js"
   ]
 }
