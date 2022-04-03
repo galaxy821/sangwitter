@@ -18,23 +18,6 @@ const Profile = ({ userObj, refreshUser }) => {
     history.push("/");
   };
 
-  const getMySangweets = async () => {
-    const dataCollection = await collection(dbService, "sangweets");
-    const q = await query(
-      dataCollection,
-      where("creatorId", "==", userObj.uid),
-      orderBy("createAt", "asc")
-    );
-    // console.log(q);
-    const sangweets = await getDocs(q);
-    //console.log(sangweets.docs.map((doc) => doc.data()));
-    //console.log(userObj.uid);
-    sangweets.forEach((document) => {
-      const sangweetObject = { ...document.data(), id: document.id };
-      setMySangweets((prev) => [sangweetObject, ...prev]);
-    });
-  };
-
   //after rendering
   useEffect(() => {
     // getMySangweets();
@@ -61,9 +44,6 @@ const Profile = ({ userObj, refreshUser }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("nickname 설정!");
-    console.log("nickname", newDisplayName);
-    console.log("original profile name : ", userObj.displayName);
     if (userObj.displayName !== newDisplayName) {
       await updateProfile(authService.currentUser, {
         displayName: newDisplayName,
@@ -102,7 +82,6 @@ const Profile = ({ userObj, refreshUser }) => {
       </span>
       <div style={{ marginTop: 20 }}>
         {mySangweets.map((mySangweet) => {
-          // console.log(mySangweet);
           return (
             <Sangweet
               key={mySangweet.id}

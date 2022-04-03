@@ -51,17 +51,6 @@ const AuthForm = ({ isVerified, isLoggedIn, refreshUser }) => {
 
             setErrorMessage("An email confirmation email has been sent.");
             toggleAccount();
-            /*
-            setTimeout(() => {
-              console.log("signin processing...");
-            }, 500);
-            /*
-            if (user.emailVerified) {
-              SetVerified(true);
-            }
-            else{
-                
-            }*/
           })
           .catch((error) => {
             // const errorCode = error.code;
@@ -87,6 +76,7 @@ const AuthForm = ({ isVerified, isLoggedIn, refreshUser }) => {
             //const user = userCredential.user;
             // ...
             refreshUser();
+
             console.log(
               "AuthForm > onSumbit! > login clicked!  login...ing...",
               isVerified
@@ -103,6 +93,15 @@ const AuthForm = ({ isVerified, isLoggedIn, refreshUser }) => {
           .catch((error) => {
             console.log(error.code);
             console.log(error.message);
+            switch (error.code) {
+              case "auth/user-not-found":
+                const message = "user not found";
+                setErrorMessage(message);
+                break;
+              default:
+                break;
+            }
+            console.log(error.code);
           });
       }
     } catch (error) {

@@ -1,34 +1,24 @@
 // import {useState} from 'react';
-import {
-  HashRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigation from "./Navigation";
 // import { useEffect, useState } from "react";
 
-const AppRouter = ({ isLoggedIn, userObj, refreshUser, isVerified }) => {
-  //const [isLoggedAndVerified, setIsLoggedAndVerified] = useState("");
-  /*
+const AppRouter = ({
+  isLoggedIn,
+  userObj,
+  refreshUser,
+  isVerified,
+  isPhotoURL,
+}) => {
   console.log(
-    "AppRouter > ",
-    isLoggedIn && isVerified,
-    "/ isLoggedIn : ",
+    "isLoggedIn, userObj,  isVerified :",
     isLoggedIn,
-    "/ isVerified : ",
+    userObj,
     isVerified
-  );*/
-  /*
-  useEffect(() => {
-    setIsLoggedAndVerified(isLoggedIn && isVerified);
-  }, []);
-*/
-  //console.log("AppRouter > ", isLoggedAndVerified);
-  // console.log(isVerified);
+  );
   return (
     <Router>
       {isLoggedIn && isVerified && <Navigation userObj={userObj} />}
@@ -53,13 +43,24 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser, isVerified }) => {
               </Route>
             </div>
           ) : (
-            <Route exact path="/">
-              <Auth
-                isVerified={isVerified}
-                isLoggedIn={isLoggedIn}
-                refreshUser={refreshUser}
-              />
-            </Route>
+            <>
+              {/* {isLoggedIn && isVerified ? (
+                <Route exact path="/">
+                  <>
+                    <div>{isLoggedIn && isVerified}</div>
+                  </>
+                </Route>
+              ) : (
+                
+              )} */}
+              <Route exact path="/">
+                <Auth
+                  isVerified={isVerified}
+                  isLoggedIn={isLoggedIn}
+                  refreshUser={refreshUser}
+                />
+              </Route>
+            </>
           )}
           {/* <Redirect from='*' to="/" /> */}
         </>
