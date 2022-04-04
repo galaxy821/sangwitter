@@ -4,6 +4,7 @@ import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigation from "./Navigation";
+import InitialProfile from "./InitialProfile";
 // import { useEffect, useState } from "react";
 
 const AppRouter = ({
@@ -11,20 +12,23 @@ const AppRouter = ({
   userObj,
   refreshUser,
   isVerified,
-  isPhotoURL,
+  isNamed,
+  // isPhotoURL,
 }) => {
   console.log(
-    "isLoggedIn, userObj,  isVerified :",
+    "AppRouter > isLoggedIn, userObj,  isVerified, isNamed:",
     isLoggedIn,
     userObj,
-    isVerified
+    isVerified,
+    isNamed
   );
+
   return (
     <Router>
-      {isLoggedIn && isVerified && <Navigation userObj={userObj} />}
+      {isLoggedIn && isVerified && isNamed && <Navigation userObj={userObj} />}
       <Switch>
         <>
-          {isLoggedIn && isVerified ? (
+          {isLoggedIn && isVerified && isNamed ? (
             <div
               style={{
                 maxWidth: 890,
@@ -44,22 +48,19 @@ const AppRouter = ({
             </div>
           ) : (
             <>
-              {/* {isLoggedIn && isVerified ? (
+              {isLoggedIn && isVerified ? (
                 <Route exact path="/">
-                  <>
-                    <div>{isLoggedIn && isVerified}</div>
-                  </>
+                  <InitialProfile userObj={userObj} refreshUser={refreshUser} />
                 </Route>
               ) : (
-                
-              )} */}
-              <Route exact path="/">
-                <Auth
-                  isVerified={isVerified}
-                  isLoggedIn={isLoggedIn}
-                  refreshUser={refreshUser}
-                />
-              </Route>
+                <Route exact path="/">
+                  <Auth
+                    isVerified={isVerified}
+                    isLoggedIn={isLoggedIn}
+                    refreshUser={refreshUser}
+                  />
+                </Route>
+              )}
             </>
           )}
           {/* <Redirect from='*' to="/" /> */}

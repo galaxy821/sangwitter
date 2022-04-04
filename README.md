@@ -2,8 +2,7 @@
 
 Twitter mini clone with React and FireBase
 
-## 1.1 change log (2022.04.03)
+## 1.1 change log (2022.04.04)
 
-Not deploy version (test version)
-Fixed bug (Not Refresh in Profile Screen when delete Sangweet)
-working on adding nickname setting screen when logging in for the first time
+bug fixed (bug : refresh value when nickname value is null in profile page)
+added nickname setting screen when logging in for the first time

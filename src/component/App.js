@@ -10,26 +10,10 @@ function App() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null); /*compat userobj version */
   const [isVerified, SetVerified] = useState(false);
-  const [isPhotoURL, setIsPhotoURL] = useState(false);
+  const [isNamed, setNamed] = useState(false);
+  // const [isPhotoURL, setIsPhotoURL] = useState(false);
 
   useEffect(() => {
-    // const getInit = localStorage.getItem("init");
-    // const getVerified = localStorage.getItem("verified");
-    // const getUserobj = localStorage.getItem("userobj");
-    // setInit(getInit);
-    // console.log("get : ", getInit);
-    // SetVerified(getVerified);
-    // console.log("get : ", getVerified);
-    // setUserObj(getUserobj);
-    // console.log("get : ", getUserobj);
-    // console.log(
-    //   "init : ",
-    //   init,
-    //   " verified : ",
-    //   isVerified,
-    //   " userObj : ",
-    //   userObj
-    // );
     onAuthStateChanged(authService, (user) => {
       if (user) {
         console.log("user :", user);
@@ -39,64 +23,58 @@ function App() {
           photoURL: user.photoURL,
           updateProfile: (arg) => user.updateProfile(arg),
         });
-        // localStorage.setItem("userobj", userObj);
-        // console.log(userObj);
-        // console.log("localsetitem : ", localStorage.getItem("userobj"));
+
+        if (userObj.displayName === null) {
+          setNamed(true);
+        } else {
+          setNamed(false);
+        }
+
         if (authService.currentUser.emailVerified) {
           SetVerified(true);
-          // console.log("verified : ", isVerified);
-          // localStorage.setItem("verified", isVerified);
-          // console.log("localsetitem : ", localStorage.getItem("verified"));
+        } else {
+          SetVerified(false);
         }
+        /*
         if (user.photoURL) {
           setIsPhotoURL(true);
-          // localStorage.isPhotoURL = JSON.stringify(isPhotoURL);
-          // localStorage.setItem('is/')/
-        }
+        }*/
       } else {
         setUserObj(false);
-        // localStorage.setItem("userobj", userObj);
-        // console.log("localsetItem : ", localStorage.getItem("userobj"));
+        SetVerified(false);
+        setNamed(false);
       }
       setInit(true);
-      // console.log("init : ", init);
-      // localStorage.setItem("init", init);
-      // console.log("json.stringify : ", localStorage.getItem("init"));
       console.log(
-        "init : ",
+        "App > init : ",
         init,
         " verified : ",
         isVerified,
         " userObj : ",
-        userObj
+        userObj,
+        " isNamed : ",
+        isNamed
       );
     });
   }, []);
-  /*
-  useEffect(() => {
-    setInit(localStorage.init);
-    SetVerified(localStorage.isVerified);
-    setUserObj(localStorage.userObj);
-    console.log(
-      "init : ",
-      init,
-      " verified : ",
-      isVerified,
-      " userObj : ",
-      userObj
-    );
-  });
-*/
+
   const refreshUser = () => {
     const user = authService.currentUser;
     if (user.emailVerified) {
       SetVerified(true);
-      // localStorage.isVerified = JSON.stringify(isVerified);
+    } else {
+      SetVerified(false);
     }
+
+    if (user.displayName) {
+      setNamed(true);
+    } else {
+      setNamed(false);
+    }
+    /*
     if (user.photoURL) {
       setIsPhotoURL(true);
-      // localStorage.isPhotoURL = JSON.stringify(isPhotoURL);
-    }
+    }*/
     setUserObj({
       uid: user.uid,
       displayName: user.displayName,
@@ -113,7 +91,8 @@ function App() {
           userObj={userObj}
           refreshUser={refreshUser}
           isVerified={isVerified}
-          isPhotoURL={isPhotoURL}
+          isNamed={isNamed}
+          // isPhotoURL={isPhotoURL}
         />
       ) : (
         <Initial />

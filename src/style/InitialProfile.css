@@ -1,0 +1,76 @@
+/* body{
+    display: block;
+    background: black;
+    height: 100%;
+    width: 100%;
+    box-sizing: content-box;
+} */
+
+/* input {
+    all: unset;
+    box-sizing: border-box;
+    appearance: none;
+  } */
+
+.initialProfileWrap{
+    display: block;
+    height: 50vh;
+    width: 80vw;
+    margin: 20px 10vw;
+    box-sizing: content-box
+}
+
+
+.initialProfileWrap .initialProfileContainer{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* justify-content: space-between; */
+    align-items: center;
+    /* flex-wrap: wrap; */
+}
+
+.initialProfileWrap .initialProfileContainer .nicknameValue{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+
+.initialProfileWrap .initialProfileContainer .inputNickname{
+    width: 52%;
+    padding: 10px 0px;
+    border-radius: 20px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: white;
+    color: black;
+}
+
+.initialProfileWrap .initialProfileContainer form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.initialProfileWrap .initialProfileContainer .inputSubmit{
+    cursor: pointer;
+    margin-top: 20px;
+    width: 52%;
+    padding: 12px 0px;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    background-color: #04aaff;
+    cursor: pointer;
+}
+
+.initialProfileWrap .initialProfileContainer img{
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+}

@@ -44,17 +44,19 @@ const Profile = ({ userObj, refreshUser }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    if (userObj.displayName !== newDisplayName) {
-      await updateProfile(authService.currentUser, {
-        displayName: newDisplayName,
-      })
-        .then(() => {
-          console.log("profile update!");
+    if (newDisplayName) {
+      if (userObj.displayName !== newDisplayName) {
+        await updateProfile(authService.currentUser, {
+          displayName: newDisplayName,
         })
-        .catch((error) => {
-          console.log("there is error!");
-        });
-      refreshUser();
+          .then(() => {
+            console.log("profile update!");
+          })
+          .catch((error) => {
+            console.log("there is error!");
+          });
+        refreshUser();
+      }
     }
   };
 
